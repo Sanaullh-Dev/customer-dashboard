@@ -2,6 +2,8 @@ import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { OtpSendResponse, LoginResponse, ApiErrorResponse, AuthFormErrors } from '../types';
 import './LoginPage.css';
 
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
 interface LoginPageProps {
   onLoginSuccess: (token: string) => void;
 }
@@ -72,7 +74,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
     setMessage('');
 
     try {
-      const response = await fetch('/auth/send-otp', {
+      const response = await fetch(`${API_BASE}/auth/send-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -112,7 +114,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
     setErrors({});
 
     try {
-      const response = await fetch('/auth/verify-otp', {
+      const response = await fetch(`${API_BASE}/auth/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

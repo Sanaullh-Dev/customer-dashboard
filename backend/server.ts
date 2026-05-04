@@ -14,8 +14,14 @@ import { authRoutes, customerRoutes } from './src/routes';
 const app: Application = express();
 const PORT: number = parseInt(process.env.PORT || '5000', 10);
 
-// Middleware
-app.use(cors());
+// Middleware - CORS configured for production
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || '*',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Routes
@@ -57,9 +63,11 @@ app.get('/api-docs', (req: Request, res: Response) => {
   });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Start server only when not in Vercel serverless environment
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
 
 export default app;

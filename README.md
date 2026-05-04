@@ -146,3 +146,39 @@ Response:
 - Email format validation
 - Required field validation
 - User-friendly error messages
+
+## Vercel Deployment
+
+### Deploy Backend
+
+1. Push your code to GitHub
+2. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+3. Click **"Add New"** → **"Project"**
+4. Import your GitHub repository
+5. Configure:
+   - **Root Directory**: `backend`
+   - **Framework Preset**: Other
+6. Add Environment Variables:
+   - `FRONTEND_URL`: Your frontend Vercel URL (after frontend deploy)
+   - `JWT_SECRET`: Your JWT secret key (optional)
+7. Click **"Deploy"**
+8. Note your backend URL (e.g., `https://your-backend.vercel.app`)
+
+### Deploy Frontend
+
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Click **"Add New"** → **"Project"**
+3. Import the same GitHub repository
+4. Configure:
+   - **Root Directory**: `frontend`
+   - **Framework Preset**: Vite
+5. Add Environment Variables:
+   - `VITE_API_URL`: Your deployed backend URL (e.g., `https://your-backend.vercel.app`)
+6. Click **"Deploy"**
+
+### Update CORS (After Both Deploy)
+
+Go to your **backend project settings** on Vercel:
+1. Navigate to **Settings** → **Environment Variables**
+2. Update `FRONTEND_URL` to your frontend's deployed URL
+3. Redeploy the backend

@@ -5,7 +5,8 @@ import LoginPage from './components/LoginPage';
 import { Customer, CustomerFormData, CustomerListResponse, CustomerResponse, ApiErrorResponse } from './types';
 import './App.css';
 
-const API_BASE_URL = '/customers';
+const API_BASE = import.meta.env.VITE_API_URL || '';
+const API_BASE_URL = `${API_BASE}/customers`;
 
 /**
  * Main App component for Customer Management Dashboard
