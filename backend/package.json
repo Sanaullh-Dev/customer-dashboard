@@ -5,6 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
+    "vercel-build": "echo 'Build handled by @vercel/node'",
     "start": "node dist/server.js",
     "dev": "ts-node server.ts",
     "dev:watch": "ts-node-dev --respawn server.ts"
